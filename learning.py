@@ -66,3 +66,29 @@ tipN = (bill / 100) * tip
 final = (tipN + bill) / people
 print(
     f"The total tip is ${tipN:.2f} from a bill of ${bill:.2f}, or ${(tipN + bill):.2f} in total. {people} people will split the total, and each should pay ${final:.2f}.")
+
+
+# Day 3
+
+height = int(input("What is your height?"))
+if height >= 120:
+    print("Tall enough")
+    age = int(input("What is your age?"))
+    if age <= 18:
+        print("You owe $7")
+    elif age >= 8 & age < 18:
+        print("You owe $10")
+    else:
+        print("You owe $43!!!")
+else:
+    print("Too short")
+if height == 120:
+    print("Exactly 120")
+
+
+number = int(input("Which number do you want to check? "))
+
+if (number % 2) != 0:
+    print("This is an odd number.")
+else:
+    print("This is an even number.")
