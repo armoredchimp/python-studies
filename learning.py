@@ -53,42 +53,60 @@
 
 
 # tip calculator
-bill = float(input("Total bill: "))
-people = int(input("How many people?"))
-while True:
-    tip = int(input("What percentage do you want to tip?"))
-    if 0 <= tip <= 100:
-        break
-    else:
-        print("Enter a valid percentage number")
-tipN = (bill / 100) * tip
+# bill = float(input("Total bill: "))
+# people = int(input("How many people?"))
+# while True:
+#     tip = int(input("What percentage do you want to tip?"))
+#     if 0 <= tip <= 100:
+#         break
+#     else:
+#         print("Enter a valid percentage number")
+# tipN = (bill / 100) * tip
 
-final = (tipN + bill) / people
-print(
-    f"The total tip is ${tipN:.2f} from a bill of ${bill:.2f}, or ${(tipN + bill):.2f} in total. {people} people will split the total, and each should pay ${final:.2f}.")
+# final = (tipN + bill) / people
+# print(
+#     f"The total tip is ${tipN:.2f} from a bill of ${bill:.2f}, or ${(tipN + bill):.2f} in total. {people} people will split the total, and each should pay ${final:.2f}.")
 
 
-# Day 3
+# # Day 3
 
-height = int(input("What is your height?"))
-if height >= 120:
-    print("Tall enough")
-    age = int(input("What is your age?"))
-    if age <= 18:
-        print("You owe $7")
-    elif age >= 8 & age < 18:
-        print("You owe $10")
-    else:
-        print("You owe $43!!!")
+# height = int(input("What is your height?"))
+# if height >= 120:
+#     print("Tall enough")
+#     age = int(input("What is your age?"))
+#     if age <= 18:
+#         print("You owe $7")
+#     elif age >= 8 & age < 18:
+#         print("You owe $10")
+#     else:
+#         print("You owe $43!!!")
+# else:
+#     print("Too short")
+# if height == 120:
+#     print("Exactly 120")
+
+
+# number = int(input("Which number do you want to check? "))
+
+# if (number % 2) != 0:
+#     print("This is an odd number.")
+# else:
+#     print("This is an even number.")
+
+# BMI 2
+weight = float(input("Weight in kg:"))
+height = float(input("Height in m:"))
+
+bmi = round(weight / (height ** 2))
+
+if bmi < 18.5:
+    fatness = "you are underweight."
+elif bmi > 18.5 and bmi <= 25.0:
+    fatness = "you have a normal weight."
+elif bmi > 25.0 and bmi <= 30.0:
+    fatness = "you are slightly overweight."
+elif bmi > 30.0 and bmi <= 35.0:
+    fatness = "you are obese."
 else:
-    print("Too short")
-if height == 120:
-    print("Exactly 120")
-
-
-number = int(input("Which number do you want to check? "))
-
-if (number % 2) != 0:
-    print("This is an odd number.")
-else:
-    print("This is an even number.")
+    fatness = "you are clinically obese."
+print(f"Your BMI is {bmi}, {fatness}")
