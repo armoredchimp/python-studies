@@ -94,19 +94,35 @@
 #     print("This is an even number.")
 
 # BMI 2
-weight = float(input("Weight in kg:"))
-height = float(input("Height in m:"))
+# weight = float(input("Weight in kg:"))
+# height = float(input("Height in m:"))
 
-bmi = round(weight / (height ** 2))
+# bmi = round(weight / (height ** 2))
 
-if bmi < 18.5:
-    fatness = "you are underweight."
-elif bmi > 18.5 and bmi <= 25.0:
-    fatness = "you have a normal weight."
-elif bmi > 25.0 and bmi <= 30.0:
-    fatness = "you are slightly overweight."
-elif bmi > 30.0 and bmi <= 35.0:
-    fatness = "you are obese."
+# if bmi < 18.5:
+#     fatness = "you are underweight."
+# elif bmi > 18.5 and bmi <= 25.0:
+#     fatness = "you have a normal weight."
+# elif bmi > 25.0 and bmi <= 30.0:
+#     fatness = "you are slightly overweight."
+# elif bmi > 30.0 and bmi <= 35.0:
+#     fatness = "you are obese."
+# else:
+#     fatness = "you are clinically obese."
+# print(f"Your BMI is {bmi}, {fatness}")
+
+
+# Leap Year
+year = int(input("Enter year:"))
+leap = False
+if year % 4 == 0:
+    leap = True
+    if year % 100 == 0:
+        leap = False
+        if year % 400 == 0:
+            leap = True
+
+if leap == True:
+    print("Leap year.")
 else:
-    fatness = "you are clinically obese."
-print(f"Your BMI is {bmi}, {fatness}")
+    print("Not leap year.")
