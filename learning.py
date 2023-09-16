@@ -208,3 +208,38 @@
 # else:
 #     print("You failed to go in either direction. The pirates from the beach soon notice you and you are enslaved. Game Over!")
 #     exit
+
+import random
+import py_module
+
+# random_int = random.randint(1, 10)
+# print(random_int)
+# print(py_module.specialnumber)
+
+# random_float = random.random()
+# print(random_float)
+# random_float * 100  # random number 0-99.99999
+
+# coin_flip = random.randint(1, 2)
+# if coin_flip == 1:
+#     print("Heads")
+# else:
+#     print("Tails")
+
+
+# list = ["a", "b", "c"]
+# list[2] = "d"
+# print(list)  # a, b, d
+
+# list.append("e")
+# list.extend(["f", "g"])
+# print(list)
+
+
+# Banker Roulette
+str = input("Type a list of names seperated by commas:\n")
+strSpl = str.split(",")
+print(strSpl[random.randint(0, len(strSpl) - 1)])
+
+# OR
+print(random.choice(strSpl))
