@@ -129,23 +129,54 @@
 
 
 # Pizza Order
-print("Welcome to Python Pizza Deliveries!")
-size = input("What size pizza do you want? S, M, or L ")
-add_pepperoni = input("Do you want pepperoni? Y or N ")
-extra_cheese = input("Do you want extra cheese? Y or N ")
-bill = 0
-if size == "S":
-    bill += 15
-elif size == "M":
-    bill += 20
-elif size == "L":
-    bill += 25
-if add_pepperoni == "Y":
-    if (size == "M" or size == "L"):
-        bill += 3
-    else:
-        bill += 2
-if extra_cheese == "Y":
-    bill += 1
+# print("Welcome to Python Pizza Deliveries!")
+# size = input("What size pizza do you want? S, M, or L ")
+# add_pepperoni = input("Do you want pepperoni? Y or N ")
+# extra_cheese = input("Do you want extra cheese? Y or N ")
+# bill = 0
+# if size == "S":
+#     bill += 15
+# elif size == "M":
+#     bill += 20
+# elif size == "L":
+#     bill += 25
+# if add_pepperoni == "Y":
+#     if (size == "M" or size == "L"):
+#         bill += 3
+#     else:
+#         bill += 2
+# if extra_cheese == "Y":
+#     bill += 1
 
-print(f"Your final bill is: ${bill}.")
+# print(f"Your final bill is: ${bill}.")
+
+
+# Love calculator
+name1 = input("First name:")
+name2 = input("Second name:")
+
+
+combined = name1 + name2
+combined = combined.lower()
+
+counter1 = 0
+counter2 = 0
+counter1 += combined.count('t')
+counter1 += combined.count('r')
+counter1 += combined.count('u')
+counter1 += combined.count('e')
+counter2 += combined.count('l')
+counter2 += combined.count('o')
+counter2 += combined.count('v')
+counter2 += combined.count('e')
+
+
+combinedN = int(str(counter1) + str(counter2))
+
+
+if combinedN < 10 or combinedN > 90:
+    print(f"Your score is {combinedN}, you go together like coke and mentos.")
+elif combinedN >= 40 and combinedN <= 50:
+    print(f"Your score is {combinedN}, you are alright together.")
+else:
+    print(f"Your score is {combinedN}.")
