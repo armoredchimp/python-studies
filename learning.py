@@ -152,31 +152,59 @@
 
 
 # Love calculator
-name1 = input("First name:")
-name2 = input("Second name:")
+# name1 = input("First name:")
+# name2 = input("Second name:")
 
 
-combined = name1 + name2
-combined = combined.lower()
+# combined = name1 + name2
+# combined = combined.lower()
 
-counter1 = 0
-counter2 = 0
-counter1 += combined.count('t')
-counter1 += combined.count('r')
-counter1 += combined.count('u')
-counter1 += combined.count('e')
-counter2 += combined.count('l')
-counter2 += combined.count('o')
-counter2 += combined.count('v')
-counter2 += combined.count('e')
-
-
-combinedN = int(str(counter1) + str(counter2))
+# counter1 = 0
+# counter2 = 0
+# counter1 += combined.count('t')
+# counter1 += combined.count('r')
+# counter1 += combined.count('u')
+# counter1 += combined.count('e')
+# counter2 += combined.count('l')
+# counter2 += combined.count('o')
+# counter2 += combined.count('v')
+# counter2 += combined.count('e')
 
 
-if combinedN < 10 or combinedN > 90:
-    print(f"Your score is {combinedN}, you go together like coke and mentos.")
-elif combinedN >= 40 and combinedN <= 50:
-    print(f"Your score is {combinedN}, you are alright together.")
-else:
-    print(f"Your score is {combinedN}.")
+# combinedN = int(str(counter1) + str(counter2))
+
+
+# if combinedN < 10 or combinedN > 90:
+#     print(f"Your score is {combinedN}, you go together like coke and mentos.")
+# elif combinedN >= 40 and combinedN <= 50:
+#     print(f"Your score is {combinedN}, you are alright together.")
+# else:
+#     print(f"Your score is {combinedN}.")
+
+# Treasure Island, obviously this is spaghetti code but that's the point of the exercise
+# lr = input("Welcome to Treasure Island. On the left, you see a beach filled with rowdy pirates. On the right, you see a path leading into the jungle. Go left or go right?").lower()
+# if lr == "left":
+#     print("The pirates quickly see you as an easy mark, you are robbed and beaten to within an inch of your life. They leave you for dead. Game Over!")
+#     exit
+# elif lr == "right":
+#     swim = input("The path soon leads to a raging river. Behind you, you hear the clamor of the pirates from the beach who noticed you and are now in pursuit. The river looks like it could be too dangerous, but upstream you notice a raft of sorts, barreling towards you. You could probably jump on it and then make your way across, but that would require waiting for another minute or two. Wait for the raft or try and swim?").lower()
+
+#     if swim == "wait" or swim == "raft":
+#         print("The pirates arrive sooner than expected and shoot you in the leg. You are enslaved. Game Over!!")
+#         exit
+#     elif swim == "swim":
+#         print("Although it is a struggle, you manage to barely swim across the river, bruising yourself in the process but arriving in once piece.")
+#         print("The path leads deep into the jungle. After some time, you come upon a small temple containing three doors. The first door has a dancing maiden on it, the middle door depicts a skull, and the final door shows a groveling beggar.")
+#         door = input("Which door do you choose? Left, middle, or right?")
+#         door = door.lower()
+#         if door == "left":
+#             print("A beautiful woman sits on a divan. She beckons you closer. Entranced, you approach, only to be instantly killed as she reveals herself to be a demon. Your last moment is seeing her face transform into an sharp-toothed horror with glowing green eyes. You Lose!!")
+#             exit
+#         elif door == "middle":
+#             print("You are instantly killed by the necromantic curse that fills this room. The door had a skull on it, was that really the one you picked? Try Again!!")
+#             exit
+#         elif door == "right":
+#             print("Inside is a wise shaman who congratulates you on picking the correct door. He grants you infinite magical powers and the ability to speak time and bend space. You Win!!")
+# else:
+#     print("You failed to go in either direction. The pirates from the beach soon notice you and you are enslaved. Game Over!")
+#     exit
