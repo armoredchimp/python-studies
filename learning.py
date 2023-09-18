@@ -304,19 +304,86 @@ import py_module
 # else:
 #     print("Invalid input")
 
-RPS = ["rock", "paper", "scissors"]
-player = input("Pick rock, paper, or scissors:\n").lower()
-computer = random.choice(RPS)
-if player == computer:
-    print("Tie game")
-    print(f"You and the computer both picked {player.capitalize()}")
-elif (player == "rock" and computer == "scissors") or (player == "scissors" and computer == "paper") or (player == "paper" and computer == "rock"):
-    print("You win!")
-    print(
-        f"You picked {player.capitalize()}, and the computer foolishly picked {computer.capitalize()}!")
-elif (player == "rock" and computer == "paper") or (player == "scissors" and computer == "rock") or (player == "paper" and computer == "scissors"):
-    print("You Lose!")
-    print(
-        f"You mistakenly picked {player.capitalize()} and the computer picked {computer.capitalize()}.")
-else:
-    print("Invalid input")
+# RPS = ["rock", "paper", "scissors"]
+# player = input("Pick rock, paper, or scissors:\n").lower()
+# computer = random.choice(RPS)
+# if player == computer:
+#     print("Tie game")
+#     print(f"You and the computer both picked {player.capitalize()}")
+# elif (player == "rock" and computer == "scissors") or (player == "scissors" and computer == "paper") or (player == "paper" and computer == "rock"):
+#     print("You win!")
+#     print(
+#         f"You picked {player.capitalize()}, and the computer foolishly picked {computer.capitalize()}!")
+# elif (player == "rock" and computer == "paper") or (player == "scissors" and computer == "rock") or (player == "paper" and computer == "scissors"):
+#     print("You Lose!")
+#     print(
+#         f"You mistakenly picked {player.capitalize()} and the computer picked {computer.capitalize()}.")
+# else:
+#     print("Invalid input")
+
+#  # GPT made this one, I did 0 of it but leaving it here for reference:
+
+
+# def rock_paper_scissors():
+#     RPS = ["rock", "paper", "scissors"]
+
+#     game_rules = {
+#         "rock": "scissors",
+#         "scissors": "paper",
+#         "paper": "rock"
+#     }
+
+#     player = input("Pick rock, paper, or scissors:\n").lower()
+#     computer = random.choice(RPS)
+
+#     if player == computer:
+#         print("Tie game")
+#         print(f"You and the computer both picked {player.capitalize()}")
+#     elif game_rules[player] == computer:  # Player's choice defeats computer's choice
+#         print("You win!")
+#         print(
+#             f"You picked {player.capitalize()}, and the computer foolishly picked {computer.capitalize()}!")
+#     elif player in RPS:  # Computer's choice defeats player's choice
+#         print("You Lose!")
+#         print(
+#             f"You mistakenly picked {player.capitalize()} and the computer picked {computer.capitalize()}.")
+#     else:
+#         print("Invalid input")
+
+
+# rock_paper_scissors()
+
+
+# Day 5
+# nums = ["1", "2", "3"]
+# for num in nums:
+#     print(num)
+#     print(num + "A")
+# print(nums)
+
+# Height calculator. Stupid exercise that actively teaches bad progamming habits
+# student_heights = input("Input a list of student heights ").split()
+
+# for n in range(0, len(student_heights)):
+#     student_heights[n] = int(student_heights[n])
+
+# total = 0
+# count = 0
+# for height in student_heights:
+#     total += height
+#     count += 1
+# print(round(total / count))
+
+# student_heights = input("Input a list of student heights ").split()
+# total = 0
+# for n in range(0, len(student_heights)):
+#     student_heights[n] = int(student_heights[n])
+#     total += student_heights[n]
+# print(round(total / len(student_heights)))
+
+student_heights = input("Input a list of student heights ").split()
+
+for n in range(0, len(student_heights)):
+    student_heights[n] = int(student_heights[n])
+
+print(round(sum(student_heights) / len(student_heights)))
