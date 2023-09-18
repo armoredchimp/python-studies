@@ -306,7 +306,7 @@ import py_module
 
 RPS = ["rock", "paper", "scissors"]
 player = input("Pick rock, paper, or scissors:\n").lower()
-computer = RPS[random.randint(0, 2) - 1]
+computer = random.choice(RPS)
 if player == computer:
     print("Tie game")
     print(f"You and the computer both picked {player.capitalize()}")
@@ -314,7 +314,7 @@ elif (player == "rock" and computer == "scissors") or (player == "scissors" and 
     print("You win!")
     print(
         f"You picked {player.capitalize()}, and the computer foolishly picked {computer.capitalize()}!")
-elif (player == "paper" and computer == "scissors") or (player == "scissors" and computer == "rock") or (player == "paper" and computer == "scissors"):
+elif (player == "rock" and computer == "paper") or (player == "scissors" and computer == "rock") or (player == "paper" and computer == "scissors"):
     print("You Lose!")
     print(
         f"You mistakenly picked {player.capitalize()} and the computer picked {computer.capitalize()}.")
