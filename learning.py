@@ -237,9 +237,86 @@ import py_module
 
 
 # Banker Roulette
-str = input("Type a list of names seperated by commas:\n")
-strSpl = str.split(",")
-print(strSpl[random.randint(0, len(strSpl) - 1)])
+# str = input("Type a list of names seperated by commas:\n")
+# strSpl = str.split(",")
+# print(strSpl[random.randint(0, len(strSpl) - 1)])
 
-# OR
-print(random.choice(strSpl))
+# # OR
+# print(random.choice(strSpl))
+
+# Treasure Map - this one kicked my ass :(
+# row1 = ["", "️", "️"]
+# row2 = ["", "", "️"]
+# row3 = ["", "", ""]
+# map = [row1, row2, row3]
+# print(f"{row1}\n{row2}\n{row3}")
+# position = input("Where do you want to put the treasure? ")
+# res = [int(position[0]), int(position[1])]
+# print(res)
+
+
+# map[res[0] - 1][res[1] - 1] = "X"
+# print(f"{row1}\n{row2}\n{row3}")
+
+# Rock Paper Scissors - didn't follow instructions correctly, we were supposed to take 0, 1, or 2 as inputs but this works
+# Rock = "Rock"
+# Paper = "Paper"
+# Scissors = "Scissors"
+# RPS = [Rock, Paper, Scissors]
+
+# player = input("Pick rock, paper, or scissors:\n").lower()
+# computer = RPS[random.randint(0, 2) - 1]
+
+
+# def tie():
+#     print("Tie game")
+
+
+# def loss():
+#     print("You Lose!")
+
+
+# def win():
+#     print("You Win!")
+
+
+# if player == "rock":
+#     if computer == Rock:
+#         tie()
+#     elif computer == Paper:
+#         loss()
+#     elif computer == Scissors:
+#         win()
+# elif player == "paper":
+#     if computer == Rock:
+#         win()
+#     elif computer == Paper:
+#         tie()
+#     elif computer == Scissors:
+#         loss()
+# elif player == "scissors":
+#     if computer == Rock:
+#         loss()
+#     elif computer == Paper:
+#         win()
+#     elif computer == Scissors:
+#         tie()
+# else:
+#     print("Invalid input")
+
+RPS = ["rock", "paper", "scissors"]
+player = input("Pick rock, paper, or scissors:\n").lower()
+computer = RPS[random.randint(0, 2) - 1]
+if player == computer:
+    print("Tie game")
+    print(f"You and the computer both picked {player.capitalize()}")
+elif (player == "rock" and computer == "scissors") or (player == "scissors" and computer == "paper") or (player == "paper" and computer == "rock"):
+    print("You win!")
+    print(
+        f"You picked {player.capitalize()}, and the computer foolishly picked {computer.capitalize()}!")
+elif (player == "paper" and computer == "scissors") or (player == "scissors" and computer == "rock") or (player == "paper" and computer == "scissors"):
+    print("You Lose!")
+    print(
+        f"You mistakenly picked {player.capitalize()} and the computer picked {computer.capitalize()}.")
+else:
+    print("Invalid input")
