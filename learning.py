@@ -381,9 +381,28 @@ import py_module
 #     total += student_heights[n]
 # print(round(total / len(student_heights)))
 
-student_heights = input("Input a list of student heights ").split()
+# student_heights = input("Input a list of student heights ").split()
 
-for n in range(0, len(student_heights)):
-    student_heights[n] = int(student_heights[n])
+# for n in range(0, len(student_heights)):
+#     student_heights[n] = int(student_heights[n])
 
-print(round(sum(student_heights) / len(student_heights)))
+# print(round(sum(student_heights) / len(student_heights)))
+
+
+# Highest Score
+# student_scores = input("Input a list of student scores ").split()
+# for n in range(0, len(student_scores)):
+#     student_scores[n] = int(student_scores[n])
+# print(student_scores)
+# highest = 0
+# for score in student_scores:
+#     if (score > highest):
+#         highest = score
+# print(f"The highest score in the class is: {highest}")
+
+for number in range(1, 11, 3):
+    print(number)
+
+total = 0
+for number in range(1, 101):
+    total += number
