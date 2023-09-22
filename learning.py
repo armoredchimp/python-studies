@@ -209,6 +209,7 @@
 #     print("You failed to go in either direction. The pirates from the beach soon notice you and you are enslaved. Game Over!")
 #     exit
 
+import math
 import random
 import py_module
 
@@ -460,109 +461,164 @@ import random
 
 
 # Hangman
-stages = ['''
- 
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
- 
-''', '''
- 
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
- 
-''', '''
- 
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
- 
-''', '''
- 
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
- 
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
- 
-''', '''
- 
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
- 
-''', '''
- 
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
- 
-''']
-word_list = ["penguin", "monkey", "castle", "palace"]
-random_word = random.choice(word_list)
-revealed_word = []
-guesses = 6
+# stages = ['''
 
-for letter in random_word:
-    revealed_word.append("_")
+#   +---+
+#   |   |
+#   O   |
+#  /|\  |
+#  / \  |
+#       |
+# =========
 
-for char in revealed_word:
-    print(f"{char} ", end="")
+# ''', '''
 
-while guesses > 0:
-    count = 0
-    guess = input("\nGuess a letter:").lower()
-    correct_guess = False
-    for letter in random_word:
-        if guess == letter:
-            print(f"{letter} ", end="")
-            count += 1
-            revealed_word[count - 1] = guess
-            correct_guess = True
-        else:
-            count += 1
-            print(f"{revealed_word[count - 1]} ", end="")
-    if correct_guess == False:
-        guesses -= 1
-        print(stages[guesses])
-    if guesses == 0:
-        if list(random_word) == revealed_word:
-            print("\nVictory!")
-            exit()
-        else:
-            print("\nDefeat!")
-            exit()
-    if list(random_word) == revealed_word:
-        print("\nVictory!")
+#   +---+
+#   |   |
+#   O   |
+#  /|\  |
+#  /    |
+#       |
+# =========
+
+# ''', '''
+
+#   +---+
+#   |   |
+#   O   |
+#  /|\  |
+#       |
+#       |
+# =========
+
+# ''', '''
+
+#   +---+
+#   |   |
+#   O   |
+#  /|   |
+#       |
+#       |
+# =========''', '''
+
+#   +---+
+#   |   |
+#   O   |
+#   |   |
+#       |
+#       |
+# =========
+
+# ''', '''
+
+#   +---+
+#   |   |
+#   O   |
+#       |
+#       |
+#       |
+# =========
+
+# ''', '''
+
+#   +---+
+#   |   |
+#       |
+#       |
+#       |
+#       |
+# =========
+
+# ''']
+# word_list = ["penguin", "monkey", "castle", "palace"]
+# random_word = random.choice(word_list)
+# revealed_word = []
+# guesses = 6
+
+# for letter in random_word:
+#     revealed_word.append("_")
+
+# for char in revealed_word:
+#     print(f"{char} ", end="")
+
+# while guesses > 0:
+#     count = 0
+#     guess = input("\nGuess a letter:").lower()
+#     correct_guess = False
+#     for letter in random_word:
+#         if guess == letter:
+#             print(f"{letter} ", end="")
+#             count += 1
+#             revealed_word[count - 1] = guess
+#             correct_guess = True
+#         else:
+#             count += 1
+#             print(f"{revealed_word[count - 1]} ", end="")
+#     if correct_guess == False:
+#         guesses -= 1
+#         print(stages[guesses])
+#     if guesses == 0:
+#         if list(random_word) == revealed_word:
+#             print("\nVictory!")
+#             exit()
+#         else:
+#             print("\nDefeat!")
+#             exit()
+#     if list(random_word) == revealed_word:
+#         print("\nVictory!")
+#         exit()
+
+
+# Day 8
+
+# def greet(name):
+
+#     print(f"Hello {name}")
+
+
+# greet("Peter")
+
+
+# def salute(name, rank):
+#     print(f"A salute to {rank} {name.upper()}!")
+
+
+# salute("Johnston", "Corporal")
+# salute(rank="Sergeant", name="Coward")
+
+
+# # Paint wall
+# def paint_calc(height, width, cover):
+#     print(
+#         f"You'll need {(math.ceil((int(height)*int(width)) / cover))} cans of paint.")
+
+
+# test_h = int(input("Height of wall: "))
+# test_w = int(input("Width of wall: "))
+# coverage = 5
+# paint_calc(height=test_h, width=test_w, cover=coverage)
+
+# Prime number detector
+n = int(input("Check this number: "))
+
+
+def prime_checker(number):
+    prime = False
+    if number <= 1:
+        print("It's not a prime number")
         exit()
+    elif number == 2 or number == 3:
+        print("It's a prime number")
+        exit()
+    for num in range(2, math.ceil(math.sqrt(number))):
+        if number % num == 0:
+            prime = False
+            print("It's not a prime number")
+            break
+        else:
+            prime = True
+    if prime == True:
+        print("It's a prime number")
+
+
+prime_checker(number=n)
