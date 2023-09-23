@@ -599,26 +599,131 @@ import random
 # paint_calc(height=test_h, width=test_w, cover=coverage)
 
 # Prime number detector
-n = int(input("Check this number: "))
+# n = int(input("Check this number: "))
 
 
-def prime_checker(number):
-    prime = False
-    if number <= 1:
-        print("It's not a prime number")
-        exit()
-    elif number == 2 or number == 3:
-        print("It's a prime number")
-        exit()
-    for num in range(2, math.ceil(math.sqrt(number))):
-        if number % num == 0:
-            prime = False
-            print("It's not a prime number")
-            break
-        else:
-            prime = True
-    if prime == True:
-        print("It's a prime number")
+# def prime_checker(number):
+#     prime = False
+#     if number <= 1:
+#         print("It's not a prime number")
+#         exit()
+#     elif number == 2 or number == 3:
+#         print("It's a prime number")
+#         exit()
+#     for num in range(2, math.ceil(math.sqrt(number))):
+#         if number % num == 0:
+#             prime = False
+#             print("It's not a prime number")
+#             break
+#         else:
+#             prime = True
+#     if prime == True:
+#         print("It's a prime number")
 
 
-prime_checker(number=n)
+# prime_checker(number=n)
+
+# Caesar Cipher
+# alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+#             'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+
+# def init():
+#     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+#     text = input("Type your message:\n").lower()
+#     shift = int(input("Type the shift number:\n"))
+#     if direction.lower() == 'encode':
+#         code(text, shift, True)
+#     elif direction.lower() == 'decode':
+#         code(text, shift, False)
+#     else:
+#         print("Enter encode or decode")
+#         init()
+
+
+# def code(text, shift, bool):
+#     cipher = []
+#     if bool == False:
+#         shift *= -1
+#     for letter in text:
+#         if letter not in alphabet:
+#             cipher.append(letter)
+#         else:
+#             cipher.append(alphabet[((alphabet.index(letter)) + shift) % 26])
+
+#     print(''.join(cipher))
+#     again = input("Another one?").lower()
+#     if again == 'yes' or again == 'ok' or again == 'absolutely':
+#         init()
+#     else:
+#         exit()
+
+
+# init()
+
+
+# I modified some dude's code on Udemy to add the repeating functionality as a challenge:
+# def encrypted(text, shift):
+#     encrypted_message = []
+#     for letter in text:
+#         # find the index of the letter in the alphabet list
+#         new_index_num = (alphabet.index(letter)+shift) % 26
+#         new_index = alphabet[new_index_num]
+#         encrypted_message.append(new_index)
+
+#     new_message = "".join(encrypted_message)
+#     print(f"Cipher Text: {new_message}")
+#     print(f"The encoded text is {new_message} ")
+#     again()
+
+
+# def decode(text, shift):
+#     decode_message = []
+#     for letter in text:
+#         # find the index of the letter in the alphabet list
+#         new_index_num = (alphabet.index(letter)-shift) % 26
+#         new_index = alphabet[new_index_num]
+#         decode_message.append(new_index)
+
+#     new_message = "".join(decode_message)
+#     print(f"The Text: {new_message}")
+#     print(f"The  decoded text is {new_message} ")
+#     again()
+
+
+# def again():
+#     again_response = input("Repeat?yes/no:").lower()
+#     if again_response == 'yes':
+#         caesar()
+#     else:
+#         exit()
+
+
+# def caesar():
+#     direction = input(
+#         " type ' encode ' to encrypt, type 'decode' to decrypt: \n ")
+#     text = input("type your message: ").lower()
+#     shift = int(input("type the shift number: "))
+
+#     if direction == "encode":
+#         encrypted(text, shift)
+#     elif direction == "decode":
+#         decode(text, shift)
+#     else:
+#         print(" Invalid choice. ")
+#         caesar()
+# caesar()
+
+
+# Day 9
+dict = {
+    "one": "part one",
+    "two": "part two",
+}
+
+dict["three"] = "part three"  # part three kvp added
+
+for key in dict:
+    print(dict[key])  # just prints all three values only
+
+dict = {}  # is now empty
