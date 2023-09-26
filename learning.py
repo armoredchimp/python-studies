@@ -729,41 +729,89 @@ import random
 # dict = {}  # is now empty
 
 
-student_scores = {
-    "Harry": 81,
-    "Ron": 78,
-    "Hermione": 99,
-    "Draco": 74,
-    "Neville": 62,
-}
+# student_scores = {
+#     "Harry": 81,
+#     "Ron": 78,
+#     "Hermione": 99,
+#     "Draco": 74,
+#     "Neville": 62,
+# }
 
-student_grades = {}
-for key, value in student_scores.items():
-    if value <= 100 and value >= 91:
-        value = "Outstanding"
-    elif value <= 90 and value >= 81:
-        value = "Exceeds Expectations"
-    elif value <= 80 and value >= 71:
-        value = "Acceptable"
-    else:
-        value = "Fail"
+# student_grades = {}
+# for key, value in student_scores.items():
+#     if value <= 100 and value >= 91:
+#         value = "Outstanding"
+#     elif value <= 90 and value >= 81:
+#         value = "Exceeds Expectations"
+#     elif value <= 80 and value >= 71:
+#         value = "Acceptable"
+#     else:
+#         value = "Fail"
 
-    student_grades[key] = value
-
-
-print(student_grades)
+#     student_grades[key] = value
 
 
-countries = {
-    "France": {"cities_visited": ["Paris", "Marseille", "Lyon", "Dijon"],
-               "Language": "French"
-               },
-    "China": ["Beijing", "Shanghai", "Wuhan"]
-}
+# print(student_grades)
 
-big_list = [
-    {"country": "France", "cities_visited": ["Paris", "Marseille", "Lyon", "Dijon"],
-     "Language": "French"},
-    {"country": "Belgium", "cities_visited": ["Brussels", "Bruge"],
-     "Language": "French"},
-]
+
+# countries = {
+#     "France": {"cities_visited": ["Paris", "Marseille", "Lyon", "Dijon"],
+#                "Language": "French"
+#                },
+#     "China": ["Beijing", "Shanghai", "Wuhan"]
+# }
+
+# big_list = [
+#     {"country": "France", "cities_visited": ["Paris", "Marseille", "Lyon", "Dijon"],
+#      "Language": "French"},
+#     {"country": "Belgium", "cities_visited": ["Brussels", "Bruge"],
+#      "Language": "French"},
+# ]
+
+# travel_log = [
+#     {
+#         "country": "France",
+#         "visits": 12,
+#         "cities": ["Paris", "Lille", "Dijon"]
+#     },
+#     {
+#         "country": "Germany",
+#         "visits": 5,
+#         "cities": ["Berlin", "Hamburg", "Stuttgart"]
+#     },
+# ]
+
+
+# def add_new_country(country, times, cities):
+#     arr = []
+#     for city in cities:
+#         arr.append(city)
+
+#     travel_log.append({"country": country, "visits": times, "cities": arr})
+
+
+# add_new_country("Russia", 2, ["Moscow", "Saint Petersburg"])
+# print(travel_log)
+
+
+# Secret Auction
+guests = int(input("How many secret bidders?\n"))
+auction = {}
+for guest in range(0, guests):
+    name = input("Your name?\n")
+    bid = int(input("Your maximum bid?\n"))
+
+    auction[name] = bid
+highest = 0
+bidder = ''
+
+
+def bid_calculation(object, number, name):
+    for key, value in object.items():
+        if value > number:
+            number = value
+            name = key
+    print(f"{name} secures the contract with a bid of ${number}.")
+
+
+bid_calculation(auction, highest, bidder)
