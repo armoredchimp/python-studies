@@ -716,14 +716,54 @@ import random
 
 
 # Day 9
-dict = {
-    "one": "part one",
-    "two": "part two",
+# dict = {
+#     "one": "part one",
+#     "two": "part two",
+# }
+
+# dict["three"] = "part three"  # part three kvp added
+
+# for key in dict:
+#     print(dict[key])  # just prints all three values only
+
+# dict = {}  # is now empty
+
+
+student_scores = {
+    "Harry": 81,
+    "Ron": 78,
+    "Hermione": 99,
+    "Draco": 74,
+    "Neville": 62,
 }
 
-dict["three"] = "part three"  # part three kvp added
+student_grades = {}
+for key, value in student_scores.items():
+    if value <= 100 and value >= 91:
+        value = "Outstanding"
+    elif value <= 90 and value >= 81:
+        value = "Exceeds Expectations"
+    elif value <= 80 and value >= 71:
+        value = "Acceptable"
+    else:
+        value = "Fail"
 
-for key in dict:
-    print(dict[key])  # just prints all three values only
+    student_grades[key] = value
 
-dict = {}  # is now empty
+
+print(student_grades)
+
+
+countries = {
+    "France": {"cities_visited": ["Paris", "Marseille", "Lyon", "Dijon"],
+               "Language": "French"
+               },
+    "China": ["Beijing", "Shanghai", "Wuhan"]
+}
+
+big_list = [
+    {"country": "France", "cities_visited": ["Paris", "Marseille", "Lyon", "Dijon"],
+     "Language": "French"},
+    {"country": "Belgium", "cities_visited": ["Brussels", "Bruge"],
+     "Language": "French"},
+]
