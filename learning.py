@@ -795,23 +795,58 @@ import random
 
 
 # Secret Auction
-guests = int(input("How many secret bidders?\n"))
-auction = {}
-for guest in range(0, guests):
-    name = input("Your name?\n")
-    bid = int(input("Your maximum bid?\n"))
+# guests = int(input("How many secret bidders?\n"))
+# auction = {}
+# for guest in range(0, guests):
+#     name = input("Your name?\n")
+#     bid = int(input("Your maximum bid?\n"))
 
-    auction[name] = bid
-highest = 0
-bidder = ''
-
-
-def bid_calculation(object, number, name):
-    for key, value in object.items():
-        if value > number:
-            number = value
-            name = key
-    print(f"{name} secures the contract with a bid of ${number}.")
+#     auction[name] = bid
+# highest = 0
+# bidder = ''
 
 
-bid_calculation(auction, highest, bidder)
+# def bid_calculation(object, number, name):
+#     for key, value in object.items():
+#         if value > number:
+#             number = value
+#             name = key
+#     print(f"{name} secures the contract with a bid of ${number}.")
+
+
+# bid_calculation(auction, highest, bidder)
+
+
+# def format_name(fName, lName):
+#     a = fName.title()
+#     b = lName.title()
+#     return a, b
+
+
+def is_leap(year):
+
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else:
+            return True
+    else:
+        return False
+
+
+def days_in_month(year, month):
+    leapV = is_leap(year)
+    month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if leapV == True:
+        month_days[1] = 29
+    return month_days[month - 1]
+
+
+# 🚨 Do NOT change any of the code below
+year = int(input("Enter a year: "))
+month = int(input("Enter a month: "))
+days = days_in_month(year, month)
+print(days)
