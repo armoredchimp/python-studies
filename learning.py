@@ -875,14 +875,29 @@ operations = {
     "/": divide
 }
 
-num1 = int(input("What's the first number?"))
+num1 = float(input("What's the first number?"))
 for symbols in operations.keys():
     print(symbols)
 operation = input("Pick a math operation: \n")
-num2 = int(input("What's the second number?"))
+num2 = float(input("What's the second number?"))
 
 
 calc = operations[operation]
 answer = calc(num1, num2)
 
 print(f"{num1} {operation} {num2} = {answer}")
+# lazy garbage below, I didn't feel like re-factoring and doing it correctly =\. Last lesson of the night
+calculating = True
+while calculating == True:
+    again = input("Keep going? y or n:\n").lower()
+    if again == "y":
+        next_num = int(input("What's the next number?"))
+        for symbols in operations.keys():
+            print(symbols)
+        operation = input("Pick a math operation: \n")
+        calc = operations[operation]
+        next_answer = calc(answer, next_num)
+        print(f"{answer} {operation} {next_num} = {next_answer}")
+        answer = next_answer
+    else:
+        calculating = False
