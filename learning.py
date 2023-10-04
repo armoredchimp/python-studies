@@ -852,52 +852,133 @@ import random
 # print(days)
 
 # Calc
-def add(n1, n2):
-    return n1 + n2
+# def add(n1, n2):
+#     return n1 + n2
 
 
-def subtract(n1, n2):
-    return n1 - n2
+# def subtract(n1, n2):
+#     return n1 - n2
 
 
-def multiply(n1, n2):
-    return n1 * n2
+# def multiply(n1, n2):
+#     return n1 * n2
 
 
-def divide(n1, n2):
-    return n1 / n2
+# def divide(n1, n2):
+#     return n1 / n2
 
 
-operations = {
-    "+": add,
-    "-": subtract,
-    "*": multiply,
-    "/": divide
-}
+# operations = {
+#     "+": add,
+#     "-": subtract,
+#     "*": multiply,
+#     "/": divide
+# }
 
-num1 = float(input("What's the first number?"))
-for symbols in operations.keys():
-    print(symbols)
-operation = input("Pick a math operation: \n")
-num2 = float(input("What's the second number?"))
+# num1 = float(input("What's the first number?"))
+# for symbols in operations.keys():
+#     print(symbols)
+# operation = input("Pick a math operation: \n")
+# num2 = float(input("What's the second number?"))
 
 
-calc = operations[operation]
-answer = calc(num1, num2)
+# calc = operations[operation]
+# answer = calc(num1, num2)
 
-print(f"{num1} {operation} {num2} = {answer}")
-# lazy garbage below, I didn't feel like re-factoring and doing it correctly =\. Last lesson of the night
-calculating = True
-while calculating == True:
-    again = input("Keep going? y or n:\n").lower()
-    if again == "y":
-        next_num = int(input("What's the next number?"))
-        for symbols in operations.keys():
-            print(symbols)
-        operation = input("Pick a math operation: \n")
-        calc = operations[operation]
-        next_answer = calc(answer, next_num)
-        print(f"{answer} {operation} {next_num} = {next_answer}")
-        answer = next_answer
+# print(f"{num1} {operation} {num2} = {answer}")
+# # lazy garbage below, I didn't feel like re-factoring and doing it correctly =\. Last lesson of the night
+# calculating = True
+# while calculating == True:
+#     again = input("Keep going? y or n:\n").lower()
+#     if again == "y":
+#         next_num = int(input("What's the next number?"))
+#         for symbols in operations.keys():
+#             print(symbols)
+#         operation = input("Pick a math operation: \n")
+#         calc = operations[operation]
+#         next_answer = calc(answer, next_num)
+#         print(f"{answer} {operation} {next_num} = {next_answer}")
+#         answer = next_answer
+#     else:
+#         calculating = False
+
+# Blackjack
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+
+def validate(player_cards, comp_cards):
+    if (sum(player_cards)) > 21:
+        if 11 in player_cards:
+            player_cards[player_cards.index(11)] = 1
+            return validate(player_cards, comp_cards)
+        print(f"Bust, you had {sum(player_cards)}")
+        exit()
+    elif (sum(comp_cards)) > 21:
+        if 11 in comp_cards:
+            comp_cards[comp_cards.index(11)] = 1
+            return validate(player_cards, comp_cards)
+        print(f"You win with {sum(player_cards)} over {sum(comp_cards)}")
+        exit()
+    elif (sum(player_cards) == 21 and (sum(comp_cards)) == 21):
+        print(f"Draw, both had 21")
+        exit()
+    elif (sum(player_cards) == 21):
+        print("Blacjack, you win!")
+        exit()
+    elif (sum(comp_cards) == 21):
+        print("Dealer Blackjack, you lose")
+        exit()
     else:
-        calculating = False
+        return
+
+
+def contin(player_cards, comp_cards):
+    cont = input("Type 'y' to get another card, type 'n' to pass:")
+    if cont == 'y':
+        player_cards.append(random.choice(cards))
+        validate(player_cards, comp_cards)
+        print(
+            f"Your cards: {player_cards}, current score: {sum(player_cards)}")
+        contin(player_cards, comp_cards)
+    elif cont == 'n':
+        computer(player_cards, comp_cards)
+
+
+def computer(player_cards, comp_cards):
+    comp_cards.append(random.choice(cards))
+    validate(player_cards, comp_cards)
+    if 21 - (sum(comp_cards)) <= 2:
+        compare(player_cards, comp_cards)
+    elif (21 - (sum(comp_cards))) > 2 and (21 - (sum(comp_cards))) <= 7:
+        l = [0, 1]
+        if (random.choice(l)) == 1:
+            computer(player_cards, comp_cards)
+        else:
+            compare(player_cards, comp_cards)
+    else:
+        computer(player_cards, comp_cards)
+
+
+def compare(player_cards, comp_cards):
+    if sum(player_cards) == sum(comp_cards):
+        print(f"Draw, both had {sum(player_cards)}")
+        exit()
+    elif sum(player_cards) > sum(comp_cards):
+        print(
+            f"You won! You had {sum(player_cards)} and the dealer had {sum(comp_cards)}")
+        exit()
+    else:
+        print(
+            f"Dealer won with {sum(comp_cards)} over your {sum(player_cards)}")
+        exit()
+
+
+player_cards = random.sample(cards, 2)
+comp_cards = [random.choice(cards)]
+print(player_cards, comp_cards)
+print(
+    f"Your cards: {player_cards}, current score: {player_cards[0] + player_cards[1]}\nComputer's first card: {comp_cards[0]}")
+comp_cards.append(random.choice(cards))
+validate(player_cards, comp_cards)
+contin(player_cards, comp_cards)
