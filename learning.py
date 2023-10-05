@@ -904,81 +904,136 @@ import random
 
 # Blackjack
 
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+# cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 
-def validate(player_cards, comp_cards):
-    if (sum(player_cards)) > 21:
-        if 11 in player_cards:
-            player_cards[player_cards.index(11)] = 1
-            return validate(player_cards, comp_cards)
-        print(f"Bust, you had {sum(player_cards)}")
-        exit()
-    elif (sum(comp_cards)) > 21:
-        if 11 in comp_cards:
-            comp_cards[comp_cards.index(11)] = 1
-            return validate(player_cards, comp_cards)
-        print(f"You win with {sum(player_cards)} over {sum(comp_cards)}")
-        exit()
-    elif (sum(player_cards) == 21 and (sum(comp_cards)) == 21):
-        print(f"Draw, both had 21")
-        exit()
-    elif (sum(player_cards) == 21):
-        print("Blacjack, you win!")
-        exit()
-    elif (sum(comp_cards) == 21):
-        print("Dealer Blackjack, you lose")
-        exit()
-    else:
-        return
+# def validate(player_cards, comp_cards):
+#     if (sum(player_cards)) > 21:
+#         if 11 in player_cards:
+#             player_cards[player_cards.index(11)] = 1
+#             return validate(player_cards, comp_cards)
+#         print(f"Bust, you had {sum(player_cards)}")
+#         exit()
+#     elif (sum(comp_cards)) > 21:
+#         if 11 in comp_cards:
+#             comp_cards[comp_cards.index(11)] = 1
+#             return validate(player_cards, comp_cards)
+#         print(f"You win with {sum(player_cards)} over {sum(comp_cards)}")
+#         exit()
+#     elif (sum(player_cards) == 21 and (sum(comp_cards)) == 21):
+#         print(f"Draw, both had 21")
+#         exit()
+#     elif (sum(player_cards) == 21):
+#         print("Blacjack, you win!")
+#         exit()
+#     elif (sum(comp_cards) == 21):
+#         print("Dealer Blackjack, you lose")
+#         exit()
+#     else:
+#         return
 
 
-def contin(player_cards, comp_cards):
-    cont = input("Type 'y' to get another card, type 'n' to pass:")
-    if cont == 'y':
-        player_cards.append(random.choice(cards))
-        validate(player_cards, comp_cards)
-        print(
-            f"Your cards: {player_cards}, current score: {sum(player_cards)}")
-        contin(player_cards, comp_cards)
-    elif cont == 'n':
-        computer(player_cards, comp_cards)
+# def contin(player_cards, comp_cards):
+#     cont = input("Type 'y' to get another card, type 'n' to pass:")
+#     if cont == 'y':
+#         player_cards.append(random.choice(cards))
+#         validate(player_cards, comp_cards)
+#         print(
+#             f"Your cards: {player_cards}, current score: {sum(player_cards)}")
+#         contin(player_cards, comp_cards)
+#     elif cont == 'n':
+#         computer(player_cards, comp_cards)
 
 
-def computer(player_cards, comp_cards):
-    comp_cards.append(random.choice(cards))
-    validate(player_cards, comp_cards)
-    if 21 - (sum(comp_cards)) <= 2:
-        compare(player_cards, comp_cards)
-    elif (21 - (sum(comp_cards))) > 2 and (21 - (sum(comp_cards))) <= 7:
-        l = [0, 1]
-        if (random.choice(l)) == 1:
-            computer(player_cards, comp_cards)
+# def computer(player_cards, comp_cards):
+#     comp_cards.append(random.choice(cards))
+#     validate(player_cards, comp_cards)
+#     if 21 - (sum(comp_cards)) <= 2:
+#         compare(player_cards, comp_cards)
+#     elif (21 - (sum(comp_cards))) > 2 and (21 - (sum(comp_cards))) <= 7:
+#         l = [0, 1]
+#         if (random.choice(l)) == 1:
+#             computer(player_cards, comp_cards)
+#         else:
+#             compare(player_cards, comp_cards)
+#     else:
+#         computer(player_cards, comp_cards)
+
+
+# def compare(player_cards, comp_cards):
+#     if sum(player_cards) == sum(comp_cards):
+#         print(f"Draw, both had {sum(player_cards)}")
+#         exit()
+#     elif sum(player_cards) > sum(comp_cards):
+#         print(
+#             f"You won! You had {sum(player_cards)} and the dealer had {sum(comp_cards)}")
+#         exit()
+#     else:
+#         print(
+#             f"Dealer won with {sum(comp_cards)} over your {sum(player_cards)}")
+#         exit()
+
+
+# player_cards = random.sample(cards, 2)
+# comp_cards = [random.choice(cards)]
+# print(player_cards, comp_cards)
+# print(
+#     f"Your cards: {player_cards}, current score: {player_cards[0] + player_cards[1]}\nComputer's first card: {comp_cards[0]}")
+# comp_cards.append(random.choice(cards))
+# validate(player_cards, comp_cards)
+# contin(player_cards, comp_cards)
+
+
+# Number Guessing Game
+
+
+def init():
+    print("Welcome to Number Guess!\nI'm thinking of a number between 1 and 100.")
+
+    def diff():
+        difficulty = input("Choose a difficulty. Type 'easy' or 'hard':")
+
+        if difficulty == 'easy':
+            attempts = 10
+            secret_number = random.randint(1, 100)
+            guess(attempts, secret_number)
+        elif difficulty == 'hard':
+            attempts = 5
+            secret_number = random.randint(1, 100)
+            guess(attempts, secret_number)
         else:
-            compare(player_cards, comp_cards)
+            print("Enter a valid input")
+            diff()
+    diff()
+
+
+def wrong(attempts, secret_number):
+    attempts -= 1
+    if attempts == 0:
+        print("You lose!")
+        again = input("Play again? Type 'y':")
+        if again == 'y':
+            init()
+        else:
+            exit()
+    print(f"You have {attempts} attempts remaining to guess the number.")
+    guess(attempts, secret_number)
+
+
+def guess(attempts, secret_number):
+    player_guess = int(input("Make a guess: "))
+    if (player_guess < secret_number):
+        print("Too low.\nGuess again.")
+        wrong(attempts, secret_number)
+    elif (player_guess > secret_number):
+        print("Too high.\nGuess again.")
+        wrong(attempts, secret_number)
+    elif (player_guess == secret_number):
+        print(f"Correct! You win! {player_guess} was the number.")
+        exit()
     else:
-        computer(player_cards, comp_cards)
+        print("Enter a valid input")
+        guess(attempts, secret_number)
 
 
-def compare(player_cards, comp_cards):
-    if sum(player_cards) == sum(comp_cards):
-        print(f"Draw, both had {sum(player_cards)}")
-        exit()
-    elif sum(player_cards) > sum(comp_cards):
-        print(
-            f"You won! You had {sum(player_cards)} and the dealer had {sum(comp_cards)}")
-        exit()
-    else:
-        print(
-            f"Dealer won with {sum(comp_cards)} over your {sum(player_cards)}")
-        exit()
-
-
-player_cards = random.sample(cards, 2)
-comp_cards = [random.choice(cards)]
-print(player_cards, comp_cards)
-print(
-    f"Your cards: {player_cards}, current score: {player_cards[0] + player_cards[1]}\nComputer's first card: {comp_cards[0]}")
-comp_cards.append(random.choice(cards))
-validate(player_cards, comp_cards)
-contin(player_cards, comp_cards)
+init()
