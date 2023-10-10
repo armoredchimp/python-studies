@@ -1045,38 +1045,169 @@ import random
 
 
 # Higher Lower
+# def init():
+#     print("Welcome To Higher/Lower!")
+#     score = 0
+#     question(score)
+
+
+# def selection():
+#     select = random.choice(data.data)
+#     print(
+#         f"{select['name']} is a {select['description']} based out of {select['country']}.")
+#     return select
+
+
+# def question(score):
+#     result = compare()
+#     guess = input("Which one do you think has more followers? Type 1 or 2.\n")
+#     if ((guess == '1') and (result == True)) or ((guess == '2') and (result == False)):
+#         print("Correct!")
+#         score += 1
+#         print(f"You currently have a score of {score}\n")
+#         question(score)
+#     else:
+#         print(f"Wrong!\nYou lost the game. You had a score of {score}.\n")
+#         init()
+
+
+# def compare():
+#     option1 = selection()
+#     option2 = selection()
+#     while option1['name'] == option2['name']:
+#         option2 = selection()
+#     if (int(option1['follower_count']) > int(option2['follower_count'])):
+#         return True
+#     else:
+#         return False
+
+
+# init()
+
+
+# Coffee machine
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+money = 10
+
+
 def init():
-    print("Welcome To Higher/Lower!")
-    score = 0
-    question(score)
-
-
-def selection():
-    select = random.choice(data.data)
     print(
-        f"{select['name']} is a {select['description']} based out of {select['country']}.")
-    return select
+        f"Welcome to the coffee machine. We currently have {len(MENU)} {'items' if len(MENU) > 1 else 'item'} for you to try.\n")
+    for drink, details in MENU.items():
+        cost = "$" + str(details['cost']) + "0"
+        items = details['ingredients']
+        ingredients = []
+        for names in items.keys():
+            ingredients.append(names)
+        print(
+            f"{drink.capitalize()} has a cost of {cost}. It contains {', '.join(ingredients)}")
+
+    def make_order():
+        order = input(
+            "\nWhat would you like to order? Type the name of the item or type 1 to view machine resources.\n").lower()
+        if order == '1':
+            print(
+                f"\nThe machine currently has {resources['water']}mL of water, {resources['milk']}mL of milk, and {resources['coffee']}g of coffee. It is currently holding ${money:.2f} in change.")
+            make_order()
+        else:
+            validateResources(order)
+    make_order()
 
 
-def question(score):
-    result = compare()
-    guess = input("Which one do you think has more followers? Type 1 or 2.\n")
-    if ((guess == '1') and (result == True)) or ((guess == '2') and (result == False)):
-        print("Correct!")
-        score += 1
-        print(f"You currently have a score of {score}\n")
-        question(score)
+def validateResources(order):
+    if order in MENU:
+        details = MENU[order]
+        for key, value in details.items():
+            if key == 'ingredients':
+                proceed = True
+                for name, amount in value.items():
+                    if resources[name] >= amount:
+                        proceed = True
+                    else:
+                        print(
+                            f"\nNot enough ingredients to make this item. The machine needs more {name}.\n")
+                        del MENU[order]
+                        proceed = False
+                        init()
+                if (proceed):
+
+                    print(
+                        "The machine is happy to process your request! But first, payment.")
+                    result = payment(order)
+                    if result == True:
+                        for name, amount in value.items():
+                            resources[name] -= amount
+                        again = input("Order something else? Type y: ").lower()
+                        if again == 'y':
+                            init()
+                        else:
+                            exit()
+                    else:
+                        print("Insufficient funds.\n")
+                        init()
     else:
-        print(f"Wrong!\nYou lost the game. You had a score of {score}.\n")
+        print("Order item not found, please make sure to type the name correctly.\n")
         init()
 
 
-def compare():
-    option1 = selection()
-    option2 = selection()
-    while option1['name'] == option2['name']:
-        option2 = selection()
-    if (int(option1['follower_count']) > int(option2['follower_count'])):
+def payment(order):
+    total_paid = 0
+    details = MENU[order]
+    quarters = int(input("How many quarters will you pay with?  "))
+    dimes = int(input("How many dimes will you pay with?  "))
+    nickels = int(input("How many nickels will you pay with?  "))
+    pennies = int(input("How many pennies will you pay with?  "))
+    total_paid += float(pennies * .01) + float(nickels * .05) + \
+        float(dimes * .1) + float(quarters * .25)
+    print(
+        f"\nYou are paying ${total_paid:.2f} for the {order.capitalize()} which costs ${details['cost']:.2f}\n")
+    if (float(details['cost']) <= float(total_paid)):
+        print("Order received! Please wait a few seconds.")
+        remaining = round(float(total_paid) - float(details['cost']), 2)
+        global money
+        if money >= remaining:
+            money -= remaining
+            print(f"You received ${remaining:.2f} in change.")
+            money += total_paid
+        else:
+            again = input(
+                "The machine does not have enough change to accept your request. Try again? Type y: \n").lower()
+            if again == 'y':
+                payment(order)
+            else:
+                exit()
+        print(f"Here is your {order.capitalize()}!")
         return True
     else:
         return False
