@@ -212,6 +212,7 @@
 import math
 import random
 import py_module
+import data
 
 # random_int = random.randint(1, 10)
 # print(random_int)
@@ -987,53 +988,101 @@ import random
 # Number Guessing Game
 
 
+# def init():
+#     print("Welcome to Number Guess!\nI'm thinking of a number between 1 and 100.")
+
+#     def diff():
+#         difficulty = input("Choose a difficulty. Type 'easy' or 'hard':")
+
+#         if difficulty == 'easy':
+#             attempts = 10
+#             secret_number = random.randint(1, 100)
+#             guess(attempts, secret_number)
+#         elif difficulty == 'hard':
+#             attempts = 5
+#             secret_number = random.randint(1, 100)
+#             guess(attempts, secret_number)
+#         else:
+#             print("Enter a valid input")
+#             diff()
+#     diff()
+
+
+# def again():
+#     again = input("Play again? Type 'y':")
+#     if again == 'y':
+#         init()
+#     else:
+#         exit()
+
+
+# def wrong(attempts, secret_number):
+#     attempts -= 1
+#     if attempts == 0:
+#         print("You lose!")
+#         again()
+#     print(f"You have {attempts} attempts remaining to guess the number.")
+#     guess(attempts, secret_number)
+
+
+# def guess(attempts, secret_number):
+#     player_guess = int(input("Make a guess: "))
+#     if (player_guess < secret_number):
+#         print("Too low.\nGuess again.")
+#         wrong(attempts, secret_number)
+#     elif (player_guess > secret_number):
+#         print("Too high.\nGuess again.")
+#         wrong(attempts, secret_number)
+#     elif (player_guess == secret_number):
+#         print(f"Correct! You win! {player_guess} was the number.")
+#         again()
+#     else:
+#         print("Enter a valid input")
+#         guess(attempts, secret_number)
+
+
+# init()
+
+
+# Higher Lower
 def init():
-    print("Welcome to Number Guess!\nI'm thinking of a number between 1 and 100.")
-
-    def diff():
-        difficulty = input("Choose a difficulty. Type 'easy' or 'hard':")
-
-        if difficulty == 'easy':
-            attempts = 10
-            secret_number = random.randint(1, 100)
-            guess(attempts, secret_number)
-        elif difficulty == 'hard':
-            attempts = 5
-            secret_number = random.randint(1, 100)
-            guess(attempts, secret_number)
-        else:
-            print("Enter a valid input")
-            diff()
-    diff()
+    print("Welcome To Higher/Lower!")
+    score = 0
+    question(score)
 
 
-def wrong(attempts, secret_number):
-    attempts -= 1
-    if attempts == 0:
-        print("You lose!")
-        again = input("Play again? Type 'y':")
-        if again == 'y':
-            init()
-        else:
-            exit()
-    print(f"You have {attempts} attempts remaining to guess the number.")
-    guess(attempts, secret_number)
+def selection():
+    select = random.choice(data.data)
+    return select
 
 
-def guess(attempts, secret_number):
-    player_guess = int(input("Make a guess: "))
-    if (player_guess < secret_number):
-        print("Too low.\nGuess again.")
-        wrong(attempts, secret_number)
-    elif (player_guess > secret_number):
-        print("Too high.\nGuess again.")
-        wrong(attempts, secret_number)
-    elif (player_guess == secret_number):
-        print(f"Correct! You win! {player_guess} was the number.")
-        exit()
+def statement(selection):
+    print(
+        f"{selection['name']} is a {selection['description']} based out of {selection['country']}.")
+
+
+def question(score):
+    result = compare()
+    guess = input("Which one do you think has more followers? Type 1 or 2.\n")
+    if ((guess == '1') and (result == True)) or ((guess == '2') and (result == False)):
+        print("Correct!")
+        score += 1
+        print(f"You currently have a score of {score}\n")
+        question(score)
     else:
-        print("Enter a valid input")
-        guess(attempts, secret_number)
+        print(f"Wrong!\nYou lost the game. You had a score of {score}.\n")
+        init()
+
+
+def compare():
+    option1 = selection()
+    statement(option1)
+    option2 = selection()
+    statement(option2)
+    if (int(option1['follower_count']) > int(option2['follower_count'])):
+        return True
+    else:
+        return False
 
 
 init()
