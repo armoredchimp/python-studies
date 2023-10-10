@@ -1053,12 +1053,9 @@ def init():
 
 def selection():
     select = random.choice(data.data)
-    return select
-
-
-def statement(selection):
     print(
-        f"{selection['name']} is a {selection['description']} based out of {selection['country']}.")
+        f"{select['name']} is a {select['description']} based out of {select['country']}.")
+    return select
 
 
 def question(score):
@@ -1076,9 +1073,9 @@ def question(score):
 
 def compare():
     option1 = selection()
-    statement(option1)
     option2 = selection()
-    statement(option2)
+    while option1['name'] == option2['name']:
+        option2 = selection()
     if (int(option1['follower_count']) > int(option2['follower_count'])):
         return True
     else:
