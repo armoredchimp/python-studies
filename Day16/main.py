@@ -1,30 +1,28 @@
-import alt_module
-import prettytable
-
-# import turtle
-# from turtle import Turtle, Screen
-
-# print(alt_module.secret)
+from menu import Menu, MenuItem
+from coffee_maker import CoffeeMaker
+from money_machine import MoneyMachine
 
 
-# timmy = Turtle()
+m = Menu()
+maker = CoffeeMaker()
+bank = MoneyMachine()
 
-# print(timmy)
-# timmy.shape("turtle")
-# timmy.color("chocolate")
-# timmy.forward(100)
 
-# my_screen = Screen()
-# print(my_screen.canvheight)
-# my_screen.exitonclick()
+def init(menu, machine, bank):
+    first = input(
+        "Welcome to the coffee machine! Type report to see the machine data, off to turn off the machine, or any key to see the menu:").lower()
+    if first == 'report':
+        machine.report()
+        init(m, maker, bank)
+    elif first == 'off':
+        exit()
+    else:
+        print(m.get_items())
+        order = menu.find_drink(input("What would you like to order: \n"))
+        if (machine.is_resource_sufficient(order) == True):
+            if (bank.make_payment(order.cost) == True):
+                machine.make_coffee(order)
+                init(m, maker, bank)
 
-from prettytable import PrettyTable
-table = PrettyTable()
-table.field_names = ['Pokemon Name', 'Type']
-table.add_row(['Pikachu', 'Electric'])
-table.add_row(['Squirtle', 'Water'])
-table.add_row(['Charmander', 'Fire'])
-# table.align['Pokemon Name'] = "l"
-# table.align['Type'] = "l"
-table.align = 'l'
-print(table)
+
+init(m, maker, bank)
