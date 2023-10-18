@@ -58,42 +58,42 @@ timmy.speed(0)
 
 
 def startPos():
-    width = screen.window_width()
-    height = screen.window_height()
-    return (int(-width / 2 + 30), int(-height / 2 + 30))
+    width = screen.window_width() // 2 - 30
+    height = screen.window_height() // 2 - 30
+    return (-width, -height)
+
+
+def move_and_dot():
+    timmy.forward(100)
+    timmy.dot(20, random.choice(painting.rgb_colors))
 
 
 def dotPainting():
     timmy.penup()
     timmy.goto(startPos())
+    timmy.dot(20, random.choice(painting.rgb_colors))
     while True:
-        timmy.dot(20, random.choice(painting.rgb_colors))
-        timmy.penup()
-        timmy.forward(100)
-        curr_x = timmy.xcor()
-        curr_y = timmy.ycor()
-        if (curr_x >= int(screen.window_width() // 2 - 20)):
+        move_and_dot()
+        curr_x, curr_y = timmy.xcor(), timmy.ycor()
+
+        if curr_x >= screen.window_width() // 2 - 20:
             timmy.left(90)
-            timmy.forward(100)
+            move_and_dot()
+            timmy.left(90)
             curr_y = timmy.ycor()
-            if (curr_y >= int(screen.window_height() // 2 - 20)):
+            if curr_y >= screen.window_height() // 2 - 20:
                 print("Image complete")
                 break
-            timmy.dot(20, random.choice(painting.rgb_colors))
-            timmy.left(90)
-            timmy.forward(100)
-        elif (curr_x <= int(-screen.window_width() // 2 + 10)):
+
+        elif curr_x <= -screen.window_width() // 2 + 10:
             timmy.right(90)
-            timmy.forward(100)
+            move_and_dot()
+            timmy.right(90)
             curr_y = timmy.ycor()
-            if (curr_y >= int(screen.window_height() // 2 - 20)):
+            if curr_y >= screen.window_height() // 2 - 20:
                 print("Image complete")
                 break
-            timmy.dot(20, random.choice(painting.rgb_colors))
-            timmy.right(90)
-            timmy.forward(100)
 
 
 dotPainting()
-
 screen.exitonclick()
