@@ -50,7 +50,7 @@ class Snake:
     def food_collision(self, x, y):
         if abs(self.segments[0].xcor() - x) < 20 and abs(self.segments[0].ycor() - y) < 20:
             self.game.add_point()
-            self.game.create_food(self)
+            self.game.create_food()
             self.add_segment()
 
     def snake_collision(self):
@@ -63,7 +63,7 @@ class Snake:
                 return
 
     def wall_collision(self, x, y):
-        if (x >= 300 or x <= -300) or (y >= 300 or y <= -300):
+        if (x >= 300 or x <= -300) or (y >= 270 or y <= -300):
             self.game.active = False
             self.game.print_score()
             return
@@ -75,13 +75,3 @@ class Snake:
     def turn_right(self):
         self.segments[0].right(90)
         self.move()
-
-    def avg_coords(self):
-        x_sum, y_sum = 0, 0
-        for seg in self.segments:
-            x, y = seg.xcor(), seg.ycor()
-            x_sum += x
-            y_sum += y
-        x_avg = x_sum / len(self.segments)
-        y_avg = y_sum / len(self.segments)
-        return x_avg, y_avg
