@@ -24,9 +24,11 @@ screen.onkey(paddleR.go_down, 'Down')
 
 
 while game:
-
+    if ball.ycor() >= 290:
+        ball.down = True
+    if ball.ycor() <= -290:
+        ball.down = False
     time.sleep(0.1)
-    if
     ball.move()
     screen.update()
 

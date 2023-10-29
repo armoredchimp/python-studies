@@ -7,7 +7,11 @@ class Ball(Turtle):
         self.shape('circle')
         self.color('white')
         self.penup()
+        self.down = False
 
     def move(self):
-        new_x, new_y = self.xcor()+10, self.ycor()+10
+        if self.down == False:
+            new_x, new_y = self.xcor()+10, self.ycor()+10
+        else:
+            new_x, new_y = self.xcor()-10, self.ycor()-10
         self.goto(new_x, new_y)
