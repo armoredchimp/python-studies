@@ -1,5 +1,6 @@
 from turtle import Turtle
 import time
+import random
 
 
 class Ball(Turtle):
@@ -26,4 +27,5 @@ class Ball(Turtle):
 
     def reset(self):
         self.goto(0, 0)
+        self.left = random.choice([True, False])
         time.sleep(3)
