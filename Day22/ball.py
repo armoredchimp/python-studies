@@ -11,21 +11,23 @@ class Ball(Turtle):
         self.penup()
         self.down = False
         self.left = False
+        self.movespeed = 10
 
     def move(self):
         if self.down == False:
             if self.left == False:
-                new_x, new_y = self.xcor()+10, self.ycor()+10
+                new_x, new_y = self.xcor()+self.movespeed, self.ycor()+self.movespeed
             else:
-                new_x, new_y = self.xcor()-10, self.ycor()+10
+                new_x, new_y = self.xcor()-self.movespeed, self.ycor()+self.movespeed
         else:
             if self.left == False:
-                new_x, new_y = self.xcor()+10, self.ycor()-10
+                new_x, new_y = self.xcor()+self.movespeed, self.ycor()-self.movespeed
             else:
-                new_x, new_y = self.xcor()-10, self.ycor()-10
+                new_x, new_y = self.xcor()-self.movespeed, self.ycor()-self.movespeed
         self.goto(new_x, new_y)
 
     def reset(self):
         self.goto(0, 0)
         self.left = random.choice([True, False])
+        self.movespeed += 1
         time.sleep(3)

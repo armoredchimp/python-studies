@@ -1,0 +1,86 @@
+from turtle import Turtle
+import random
+COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
+STARTING_MOVE_DISTANCE = 5
+MOVE_INCREMENT = 10
+CAR_ID = 0
+
+
+class CarManager:
+    def __init__(self):
+        self.active = True
+        self.all_cars = []
+
+    def build_car(self):
+        self.car = Car()
+        self.all_cars.append(self.car)
+
+    def move_all_cars(self):
+        car_removal = []
+        for car in self.all_cars:
+            if car.move():
+                car.move()
+                car_removal.append(car)
+
+        for car in car_removal:
+            self.all_cars.remove(car)
+
+
+class Car:
+    def __init__(self):
+        global CAR_ID
+        self.full_car = []
+        self.name = CAR_ID
+        CAR_ID += 1
+        x = 300
+        y = random.randint(-210, 300)
+        color = random.choice(COLORS)
+        for _ in range(2):
+            component = CarComponent(x, y, color)
+            x += 20
+            self.full_car.append(component)
+
+    def move(self):
+        out = False
+        for component in self.full_car:
+            if component.xcor() <= -300:
+                component.hideturtle()
+                component.clear()
+                out = True
+            else:
+                new_x, new_y = component.xcor() - 20, component.ycor()
+                component.goto(new_x, new_y)
+        return out
+
+
+class CarComponent(Turtle):
+    def __init__(self, x, y, color):
+        super().__init__()
+        self.shape('square')
+        self.color(f'{color}')
+        self.penup()
+        self.goto(x, y)
+        self.setheading(180)
+
+    # def buildCar(self):
+    #     self.blocks = []
+    #     color = random.choice(COLORS)
+    #     speed = random.randint(3, 8)
+    #     x = 300
+    #     y_location = random.randint(-210, 300)
+    #     for _ in range(2):
+    #         car = Turtle('square')
+    #         car.color(f'{color}')
+    #         car.penup()
+    #         car.goto(x, y_location)
+    #         car.pendown()
+    #         car.setheading(180)
+    #         car.penup()
+    #         car.forward(50)
+    #         x += 20
+    #         self.blocks.append(car)
+    #     self.move(self.blocks)
+
+    # def move(car):
+    #     self.car = car
+    #     new_x, new_y = self.car.xcor()+self.movespeed, self.car.ycor()+self.movespeed

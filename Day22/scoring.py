@@ -31,7 +31,6 @@ class PlayerScore(Turtle):
             self.goto(240, 280)
         self.write(f"{self.score}", font=(
             "Arial", 12, "normal"), align="right")
-        print(f"{self.score} created")
         self.hideturtle()
 
     def clear(self):
