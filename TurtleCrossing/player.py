@@ -31,5 +31,8 @@ class Player(Turtle):
         self.forward(MOVE_DISTANCE)
 
     def finish_line(self):
+        crossed = False
         if self.ycor() >= FINISH_LINE_Y:
-            print('Victory!')
+            crossed = True
+            self.goto(400, 400)
+            return crossed

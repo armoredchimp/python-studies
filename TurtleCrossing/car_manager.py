@@ -8,14 +8,15 @@ CAR_ID = 0
 
 
 class CarManager:
-    def __init__(self, player, screen):
+    def __init__(self, player, screen, level):
         self.active = True
+        self.level = level
         self.screen = screen
         self.player = player
         self.all_cars = []
 
     def build_car(self):
-        self.car = Car()
+        self.car = Car(self.level)
         self.all_cars.append(self.car)
 
     def move_all_cars(self):
@@ -31,12 +32,20 @@ class CarManager:
         for car in self.all_cars:
             car.collision(self.player, self.screen)
 
+    def clear_all_cars(self):
+        for car in self.all_cars:
+            for component in car.full_car:
+                component.hideturtle()
+                component.clear()
+        self.all_cars.clear()
+
 
 class Car:
-    def __init__(self):
-        global CAR_ID
+    def __init__(self, level):
+        global CAR_ID, MOVE_INCREMENT
         self.full_car = []
         self.name = CAR_ID
+        self.level = level
         CAR_ID += 1
         x = 300
         y = random.randint(-210, 280)
@@ -53,7 +62,8 @@ class Car:
                 component.hideturtle()
                 component.clear()
             else:
-                new_x, new_y = component.xcor() - STARTING_MOVE_DISTANCE, component.ycor()
+                new_x, new_y = component.xcor() - (STARTING_MOVE_DISTANCE +
+                                                   (MOVE_INCREMENT * self.level * 0.2)), component.ycor()
                 component.goto(new_x, new_y)
                 out = False
         return out
