@@ -1,5 +1,6 @@
 from turtle import Turtle
 import random
+import time
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
@@ -7,8 +8,10 @@ CAR_ID = 0
 
 
 class CarManager:
-    def __init__(self):
+    def __init__(self, player, screen):
         self.active = True
+        self.screen = screen
+        self.player = player
         self.all_cars = []
 
     def build_car(self):
@@ -17,13 +20,16 @@ class CarManager:
 
     def move_all_cars(self):
         car_removal = []
-        for car in self.all_cars:
+        for car in list(self.all_cars):
             if car.move():
                 car.move()
                 car_removal.append(car)
-
         for car in car_removal:
             self.all_cars.remove(car)
+
+    def detect_collision(self):
+        for car in self.all_cars:
+            car.collision(self.player, self.screen)
 
 
 class Car:
@@ -33,7 +39,7 @@ class Car:
         self.name = CAR_ID
         CAR_ID += 1
         x = 300
-        y = random.randint(-210, 300)
+        y = random.randint(-210, 280)
         color = random.choice(COLORS)
         for _ in range(2):
             component = CarComponent(x, y, color)
@@ -41,23 +47,40 @@ class Car:
             self.full_car.append(component)
 
     def move(self):
-        out = False
+        out = True
         for component in self.full_car:
-            if component.xcor() <= -300:
+            if component.xcor() <= -320:
                 component.hideturtle()
                 component.clear()
-                out = True
             else:
-                new_x, new_y = component.xcor() - 20, component.ycor()
+                new_x, new_y = component.xcor() - STARTING_MOVE_DISTANCE, component.ycor()
                 component.goto(new_x, new_y)
+                out = False
         return out
+
+    def collision(self, player, screen):
+        self.player = player
+        self.screen = screen
+        collided = False
+        for component in self.full_car:
+            if self.player.distance(component) < 20:
+                component.color('black')
+                collided = True
+        if collided:
+            screen.update()
+            time.sleep(0.5)
+            self.player.goto(0, -280)
+            for component in self.full_car:
+                component.color(component.original_color)
+            screen.update()
 
 
 class CarComponent(Turtle):
     def __init__(self, x, y, color):
         super().__init__()
         self.shape('square')
-        self.color(f'{color}')
+        self.original_color = color
+        self.color(self.original_color)
         self.penup()
         self.goto(x, y)
         self.setheading(180)
