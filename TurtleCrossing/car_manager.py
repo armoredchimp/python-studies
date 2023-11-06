@@ -48,7 +48,7 @@ class Car:
         self.level = level
         CAR_ID += 1
         x = 300
-        y = random.randint(-210, 280)
+        y = random.randint(-210, 270)
         color = random.choice(COLORS)
         for _ in range(2):
             component = CarComponent(x, y, color)

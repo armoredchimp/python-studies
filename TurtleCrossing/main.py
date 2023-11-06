@@ -3,14 +3,20 @@ from turtle import Screen
 from player import Player
 import car_manager as CM
 from scoreboard import Scoreboard
+from background import Background
 
 
 def setup_game():
-    global player, car_manager, screen, ticker, level
+    global player, car_manager, screen, ticker, level, sb
     screen.tracer(0)
     screen.listen()
     ticker = 0
     player = Player()
+    if 'sb' in globals():
+        sb.clear()
+        sb = Scoreboard(screen, level)
+    else:
+        sb = Scoreboard(screen, level)
     if 'car_manager' in globals():
         car_manager.clear_all_cars()
     car_manager = CM.CarManager(player, screen, level)
@@ -46,6 +52,7 @@ ticker_max = 15
 level = 1
 screen = Screen()
 screen.setup(width=600, height=600)
+bg = Background(screen)
 setup_game()
 game_is_on = True
 game()
