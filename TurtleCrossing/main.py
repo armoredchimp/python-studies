@@ -2,7 +2,7 @@ import time
 from turtle import Screen
 from player import Player
 import car_manager as CM
-from scoreboard import Scoreboard
+from scoreboard import Scoreboard, GameOver
 from background import Background
 
 
@@ -12,7 +12,7 @@ def setup_game():
     screen.listen()
     ticker = 0
     player = Player()
-    if 'sb' in globals():
+    if 'sb' in globals() and game_is_on:
         sb.clear()
         sb = Scoreboard(screen, level)
     else:
@@ -35,12 +35,31 @@ def car_interval():
 
 
 def game():
-    global game_is_on, level, ticker_max
+    global game_is_on, level, ticker_max, score, attempts, sb
+
     while game_is_on:
         car_interval()
         car_manager.move_all_cars()
-        car_manager.detect_collision()
+        sb.score_clear()
+        sb.score_text(score, attempts)
+        if car_manager.detect_collision():
+            attempts += 1
+            score -= 10
+            if attempts >= 2:
+                game_is_on = False
+                sb.clear()
+                player.goto(600, 680)
+                bg.game_end()
+                gmov = GameOver(score)
+                player.color('black')
+            else:
+                player.goto(0, -280)
+                sb.score_clear()
         if player.finish_line():
+            score += 100
+            attempts = 0
+            sb.score_clear()
+            sb.score_text(score, attempts)
             level += 1
             ticker_max -= 1
             setup_game()
@@ -50,6 +69,8 @@ def game():
 
 ticker_max = 15
 level = 1
+score = 0
+attempts = 0
 screen = Screen()
 screen.setup(width=600, height=600)
 bg = Background(screen)
@@ -58,4 +79,5 @@ game_is_on = True
 game()
 
 
+screen.exitonclick()
 #

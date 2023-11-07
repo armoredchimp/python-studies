@@ -30,7 +30,11 @@ class CarManager:
 
     def detect_collision(self):
         for car in self.all_cars:
-            car.collision(self.player, self.screen)
+            if (car.collision(self.player, self.screen)):
+                # self.player.goto(0, -280)
+                self.screen.update()
+                collision = True
+                return collision
 
     def clear_all_cars(self):
         for car in self.all_cars:
@@ -46,11 +50,14 @@ class Car:
         self.full_car = []
         self.name = CAR_ID
         self.level = level
+        self.car_sizes = [1, 2, 3, 4]
+        self.car_weights = [1, 49, 1, 1]
+        self.cars = random.choices(self.car_sizes, self.car_weights, k=1)[0]
         CAR_ID += 1
         x = 300
         y = random.randint(-210, 270)
         color = random.choice(COLORS)
-        for _ in range(2):
+        for _ in range(self.cars):
             component = CarComponent(x, y, color)
             x += 20
             self.full_car.append(component)
@@ -75,14 +82,11 @@ class Car:
         for component in self.full_car:
             if self.player.distance(component) < 20:
                 component.color('black')
-                collided = True
-        if collided:
-            screen.update()
-            time.sleep(0.5)
-            self.player.goto(0, -280)
-            for component in self.full_car:
+                self.screen.update()
+                time.sleep(0.5)
                 component.color(component.original_color)
-            screen.update()
+                collided = True
+        return collided
 
 
 class CarComponent(Turtle):
