@@ -13,20 +13,26 @@ class CarManager:
         self.level = level
         self.screen = screen
         self.player = player
-        self.all_cars = []
+        self.all_cars, self.left_cars, self.right_cars = [], [], []
 
-    def build_car(self):
-        self.car = Car(self.level)
-        self.all_cars.append(self.car)
+    def build_cars(self):
+        right_x, right_y = 320, random.randint(30, 260)
+        left_x, left_y = -320, random.randint(-240, -10)
+        self.right_car = Car(self.level, right_x, right_y)
+        self.left_car = Car(self.level, left_x, left_y)
+        self.all_cars.extend([self.right_car, self.left_car])
+        self.right_cars.append(self.right_car)
+        self.left_cars.append(self.left_car)
 
     def move_all_cars(self):
-        car_removal = []
-        for car in list(self.all_cars):
-            if car.move():
-                car.move()
-                car_removal.append(car)
-        for car in car_removal:
-            self.all_cars.remove(car)
+        for car in list(self.right_cars):
+            if car.move_west():
+                self.all_cars.remove(car)
+                self.right_cars.remove(car)
+        for car in list(self.left_cars):
+            if car.move_east():
+                self.all_cars.remove(car)
+                self.left_cars.remove(car)
 
     def detect_collision(self):
         for car in self.all_cars:
@@ -45,7 +51,7 @@ class CarManager:
 
 
 class Car:
-    def __init__(self, level):
+    def __init__(self, level, x, y):
         global CAR_ID, MOVE_INCREMENT
         self.full_car = []
         self.name = CAR_ID
@@ -53,24 +59,38 @@ class Car:
         self.car_sizes = [1, 2, 3, 4]
         self.car_weights = [1, 49, 1, 1]
         self.cars = random.choices(self.car_sizes, self.car_weights, k=1)[0]
+        self.y = y
+        self.x = x
+        self.movespeed = STARTING_MOVE_DISTANCE + \
+            ((MOVE_INCREMENT + random.randint(-10, 5)) * self.level * 0.2)
         CAR_ID += 1
-        x = 300
-        y = random.randint(-210, 270)
+        # y = random.randint(-210, 270)
         color = random.choice(COLORS)
         for _ in range(self.cars):
             component = CarComponent(x, y, color)
             x += 20
             self.full_car.append(component)
 
-    def move(self):
+    def move_west(self):
         out = True
         for component in self.full_car:
             if component.xcor() <= -320:
                 component.hideturtle()
                 component.clear()
             else:
-                new_x, new_y = component.xcor() - (STARTING_MOVE_DISTANCE +
-                                                   (MOVE_INCREMENT * self.level * 0.2)), component.ycor()
+                new_x, new_y = component.xcor() - self.movespeed, component.ycor()
+                component.goto(new_x, new_y)
+                out = False
+        return out
+
+    def move_east(self):
+        out = True
+        for component in self.full_car:
+            if component.xcor() >= 320:
+                component.hideturtle()
+                component.clear()
+            else:
+                new_x, new_y = component.xcor() + self.movespeed, component.ycor()
                 component.goto(new_x, new_y)
                 out = False
         return out
@@ -97,27 +117,7 @@ class CarComponent(Turtle):
         self.color(self.original_color)
         self.penup()
         self.goto(x, y)
-        self.setheading(180)
-
-    # def buildCar(self):
-    #     self.blocks = []
-    #     color = random.choice(COLORS)
-    #     speed = random.randint(3, 8)
-    #     x = 300
-    #     y_location = random.randint(-210, 300)
-    #     for _ in range(2):
-    #         car = Turtle('square')
-    #         car.color(f'{color}')
-    #         car.penup()
-    #         car.goto(x, y_location)
-    #         car.pendown()
-    #         car.setheading(180)
-    #         car.penup()
-    #         car.forward(50)
-    #         x += 20
-    #         self.blocks.append(car)
-    #     self.move(self.blocks)
-
-    # def move(car):
-    #     self.car = car
-    #     new_x, new_y = self.car.xcor()+self.movespeed, self.car.ycor()+self.movespeed
+        if x > 300:
+            self.setheading(180)
+        else:
+            self.setheading(0)

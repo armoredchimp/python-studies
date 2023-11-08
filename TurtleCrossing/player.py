@@ -31,6 +31,12 @@ class Player(Turtle):
         self.setheading(270)
         self.forward(MOVE_DISTANCE)
 
+    def median(self):
+        crossed = False
+        if self.ycor() > 10:
+            crossed = True
+            return crossed
+
     def finish_line(self):
         crossed = False
         if self.ycor() >= FINISH_LINE_Y:

@@ -7,10 +7,11 @@ from background import Background
 
 
 def setup_game():
-    global player, car_manager, screen, ticker, level, sb
+    global player, car_manager, screen, ticker, level, sb, median
     screen.tracer(0)
     screen.listen()
     ticker = 0
+    median = False
     player = Player()
     if 'sb' in globals() and game_is_on:
         sb.clear()
@@ -30,12 +31,12 @@ def car_interval():
     global ticker, ticker_max
     ticker += 1
     if ticker == ticker_max:
-        car_manager.build_car()
+        car_manager.build_cars()
         ticker = 0
 
 
 def game():
-    global game_is_on, level, ticker_max, score, attempts, sb
+    global game_is_on, level, ticker_max, score, attempts, sb, median
 
     while game_is_on:
         car_interval()
@@ -45,7 +46,7 @@ def game():
         if car_manager.detect_collision():
             attempts += 1
             score -= 10
-            if attempts >= 2:
+            if attempts >= 3:
                 game_is_on = False
                 sb.clear()
                 player.goto(600, 680)
@@ -55,8 +56,11 @@ def game():
             else:
                 player.goto(0, -280)
                 sb.score_clear()
+        if player.median() and median == False:
+            score += 10
+            median = True
         if player.finish_line():
-            score += 100
+            score += 90
             attempts = 0
             sb.score_clear()
             sb.score_text(score, attempts)
@@ -67,7 +71,7 @@ def game():
         screen.update()
 
 
-ticker_max = 15
+ticker_max = 18
 level = 1
 score = 0
 attempts = 0
