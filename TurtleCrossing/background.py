@@ -11,7 +11,7 @@ class Background():
         self.draw_rectangle("green", -310, 280, 600, 20)
 
     def game_end(self):
-        self.draw_rectangle("black", -310, -300, 600, 20)
+        self.draw_rectangle("black", -310, -300, 600, 40)
         self.draw_rectangle("black", -310, 280, 600, 20)
 
     def draw_rectangle(self, color, start_x, start_y, width, height):
