@@ -1,5 +1,6 @@
 from turtle import Turtle
 import snake_file as snkf
+high_score = 0
 
 
 class StaticBoard():
@@ -47,6 +48,9 @@ class GameOver(Turtle):
     def __init__(self, scoreValue):
         super().__init__()
         self.score = scoreValue
+        self.high_score = high_score
+        if (self.score > self.high_score):
+            self.high_score = self.score
         self.color('blue')
         self.penup()
         self.goto(-100, 150)
@@ -56,6 +60,6 @@ class GameOver(Turtle):
         self.goto(-100, 50)
         self.color('white')
         self.pendown()
-        self.write(f"Your score was {self.score}", font=(
-            "Arial", 20, 'normal'), align="center")
+        self.write(f"Your score was {self.score}, the high score is {self.high_score}", font=(
+            "Arial", 14, 'normal'), align="center")
         self.hideturtle()

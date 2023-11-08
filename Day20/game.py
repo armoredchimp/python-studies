@@ -1,6 +1,7 @@
 import snake_file as sf
 import food
 import random
+import time
 import scoreboard as sb
 
 
@@ -44,8 +45,13 @@ class Game:
 
     def print_score(self):
         if not self.printed:
-            sb.GameOver(self.score)
+            gmov = sb.GameOver(self.score)
             self.printed = True
+            sf.screen.update()
+            time.sleep(3)
+            gmov.clear()
+            new_game = Game()
+            new_game.new_game(sf.screen)
 
 
 game = Game()

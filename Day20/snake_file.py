@@ -59,12 +59,16 @@ class Snake:
             seg_x, seg_y = seg.xcor(), seg.ycor()
             if abs(head_x - seg_x) < 10 and abs(head_y - seg_y) < 10:
                 self.game.active = False
+                self.clear_snake()
+                screen.update()
                 self.game.print_score()
                 return
 
     def wall_collision(self, x, y):
         if (x >= 300 or x <= -300) or (y >= 270 or y <= -300):
             self.game.active = False
+            self.clear_snake()
+            screen.update
             self.game.print_score()
             return
 
@@ -75,3 +79,8 @@ class Snake:
     def turn_right(self):
         self.segments[0].right(90)
         self.move()
+
+    def clear_snake(self):
+        for segment in self.segments:
+            segment.hideturtle()
+            segment.clear()
