@@ -55,12 +55,10 @@ class Car:
         global CAR_ID, MOVE_INCREMENT
         self.full_car = []
         self.name = CAR_ID
-        self.level = level
+        self.level, self.x, self.y = level, x, y
         self.car_sizes = [1, 2, 3, 4]
         self.car_weights = [1, 49, 1, 1]
         self.cars = random.choices(self.car_sizes, self.car_weights, k=1)[0]
-        self.y = y
-        self.x = x
         self.movespeed = STARTING_MOVE_DISTANCE + \
             ((MOVE_INCREMENT + random.randint(-10, 5)) * self.level * 0.2)
         CAR_ID += 1
@@ -96,8 +94,7 @@ class Car:
         return out
 
     def collision(self, player, screen):
-        self.player = player
-        self.screen = screen
+        self.player, self.screen = player, screen
         collided = False
         for component in self.full_car:
             if self.player.distance(component) < 20:
