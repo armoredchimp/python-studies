@@ -47,8 +47,11 @@ class Game:
         if not self.printed:
             gmov = sb.GameOver(self.score)
             self.printed = True
+            if self.current_food:
+                self.current_food.clear()
             sf.screen.update()
             time.sleep(3)
+            self.scoreNum.clear()
             gmov.clear()
             new_game = Game()
             new_game.new_game(sf.screen)

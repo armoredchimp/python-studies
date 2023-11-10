@@ -1,6 +1,7 @@
 from turtle import Turtle
 import snake_file as snkf
-high_score = 0
+with open('data.txt', mode='r') as file:
+    high_score = int(file.read())
 
 
 class StaticBoard():
@@ -9,23 +10,27 @@ class StaticBoard():
         self.createLine()
 
     def createText(self):
-        pen = Turtle()
-        pen.color('white')
-        pen.penup()
-        pen.goto(-10, 280)
-        pen.pendown()
-        pen.write("Current Score: ", font=(
+        self.pen = Turtle()
+        self.pen.color('white')
+        self.pen.penup()
+        self.pen.goto(-10, 280)
+        self.pen.pendown()
+        self.pen.write("Current Score: ", font=(
             "Arial", 12, "normal"), align="center")
-        pen.hideturtle()
+        self.pen.hideturtle()
 
     def createLine(self):
-        line = Turtle()
-        line.color('white')
-        line.penup()
-        line.goto(-300, 270)
-        line.pendown()
-        line.goto(300, 270)
-        line.hideturtle()
+        self.line = Turtle()
+        self.line.color('white')
+        self.line.penup()
+        self.line.goto(-300, 270)
+        self.line.pendown()
+        self.line.goto(300, 270)
+        self.line.hideturtle()
+
+    # def clear(self):
+    #     self.pen.clear()
+    #     self.line.clear()
 
 
 class DynamicScore(Turtle):
@@ -51,6 +56,8 @@ class GameOver(Turtle):
         self.high_score = high_score
         if (self.score > self.high_score):
             self.high_score = self.score
+            with open('data.txt', mode='w') as file:
+                file.write(str(self.high_score))
         self.color('blue')
         self.penup()
         self.goto(-100, 150)
