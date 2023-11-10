@@ -36,7 +36,7 @@ class Snake:
 
     def move(self):
         screen.update()
-        time.sleep(0.1)
+        time.sleep(0.08)
         food_x, food_y = self.game.food_coords[0], self.game.food_coords[1]
         for seg in range(len(self.segments) - 1, 0, -1):
             new_x = self.segments[seg - 1].xcor()
