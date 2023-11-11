@@ -58,6 +58,8 @@ class GameOver(Turtle):
             self.high_score = self.score
             with open('data.txt', mode='w') as file:
                 file.write(str(self.high_score))
+        with open('data.txt', mode='r') as file:
+            self.current_high_score = int(file.read())
         self.color('blue')
         self.penup()
         self.goto(-100, 150)
@@ -67,6 +69,6 @@ class GameOver(Turtle):
         self.goto(-100, 50)
         self.color('white')
         self.pendown()
-        self.write(f"Your score was {self.score}, the high score is {self.high_score}", font=(
+        self.write(f"Your score was {self.score}, the high score is {self.current_high_score}", font=(
             "Arial", 14, 'normal'), align="center")
         self.hideturtle()
