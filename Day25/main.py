@@ -10,11 +10,11 @@ import pandas as pd
 #     temperatures.pop(0)
 #     print(temperatures)
 
-# data = pd.read_csv('weather_data.csv')
-# print(data['temp'])
+data = pd.read_csv('weather_data.csv')
+print(data['temp'])
 
-# data_dict = data.to_dict()
-# print(data_dict)
+data_dict = data.to_dict()
+print(data_dict)
 
 # temp_list = data['temp'].to_list()
 # print(temp_list)
@@ -34,12 +34,12 @@ def average_from_list(list):
 # print(data[data.day == 'Monday'])
 # print(data[data.temp == data.temp.max()])
 
-# monday = data[data.day == 'Monday']
-# print(monday.temp * (9/5) + 32)  # valid
+monday = data[data.day == 'Monday']
+print(monday.temp * (9/5) + 32)  # valid
 
 
-# data2 = pd.DataFrame(data_dict)
-# data2.to_csv('new_data.csv')
+data2 = pd.DataFrame(data_dict)
+data2.to_csv('new_data.csv')
 
 
 # squirrel_data = pd.read_csv('squirrel_data.csv')
@@ -49,5 +49,6 @@ def average_from_list(list):
 
 
 # More efficient but less readable version:
-# fur_values = pd.read_csv('squirrel_data.csv')['Primary Fur Color'].value_counts()
-# fur_values.to_csv('fur.csv')
+fur_values = pd.read_csv('squirrel_data.csv')[
+    'Primary Fur Color'].value_counts()
+fur_values.to_csv('fur.csv')
