@@ -65,5 +65,3 @@ def education():
 question(0, 0)
 
 screen.exitonclick()
-# self.write(f"{self.score}", font=(
-#             "Arial", 12, "normal"), align="right")
