@@ -23,7 +23,7 @@ def question(score, guesses):
             title=f"{score}/50 states Correct", prompt="Name another state:")
         if answer_state is None:
             print("Exiting now")
-            return
+            exit()
         for state in states_doc.state:
             if answer_state.lower() == state.lower() and answer_state.lower() not in answered:
                 write_state(state)
@@ -56,10 +56,12 @@ def top_text(text):
 
 def education():
     for state in states_doc.state:
-        if state not in answered:
+        if state.lower() not in answered:
             remaining.append(state)
-    for state in remaining:
-        write_state(state)
+    with open('practice_these.csv', mode='w')as file:
+        for state in remaining:
+            file.write(state + '\n')
+            write_state(state)
 
 
 question(0, 0)
