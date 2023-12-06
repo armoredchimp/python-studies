@@ -14,7 +14,7 @@ pen.speed(10)
 pen.hideturtle()
 
 states_doc = p.read_csv('D:/Python/States/50_states.csv')
-answered, remaining = [], []
+answered = []
 
 
 def question(score, guesses):
@@ -55,9 +55,8 @@ def top_text(text):
 
 
 def education():
-    for state in states_doc.state:
-        if state.lower() not in answered:
-            remaining.append(state)
+    remaining = [state for state in states_doc if state.lower()
+                 not in answered]
     with open('practice_these.csv', mode='w')as file:
         for state in remaining:
             file.write(state + '\n')

@@ -1,3 +1,4 @@
+import pandas
 import random
 
 numbers = [1, 2, 3]
@@ -53,3 +54,17 @@ weather_c = eval(input())
 
 weather_f = {day: (int(temp) * 9/5) + 32 for (day, temp) in weather_c.items()}
 print(weather_f)
+
+
+student_dict = {
+    "student": ['Angela', 'James', 'Steven', 'Maurizio'],
+    "score": [21, 24, 19, 15]
+}
+
+student_data_frame = pandas.DataFrame(student_dict)
+
+for (index, row) in student_data_frame.iterrows():
+    print(row)
+    print(row.score)
+    if row.student == 'Maurizio':
+        print(row.score - 20)
