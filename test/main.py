@@ -17,10 +17,10 @@ class Musician:
         self.MName = f'{random.choice(metal_names)}'
         self.Creativity = random.randint(1, 20)
         self.Talent = random.randint(1, 20)
-        self.multi_talented = math.floor(
+        self.MultiTalented = math.floor(
             random.randint(1, 10) * (self.Talent * 0.5))
-        print(self.multi_talented)
-        if self.multi_talented > 45:
+        print(self.MultiTalented)
+        if self.MultiTalented > 45:
             self.Guitar, self.Bass, self.Drum, self.Vocal = instruments(
                 random.randint(2, 4))
         else:
@@ -62,8 +62,33 @@ def instruments(number):
     return Guitar, Drum, Bass, Vocal
 
 
-for n in range(1, 10):
-    M = Musician()
+def start():
+    musicians = [Musician() for _ in range(4)]
+    band = Band(*musicians)
 
-# class Band:
-#     def __init__(self):
+
+class Band():
+    def __init__(self, guitarist, drummer, bassist, vocalist):
+        self.guitarist = guitarist
+        self.drummer = drummer
+        self.bassist = bassist
+        self.vocalist = vocalist
+        self.members = [self.guitarist, self.drummer,
+                        self.bassist, self.vocalist]
+        self.creativity = sum_attributes(
+            self.members, 'Creativity')
+        self.songwriting = sum_attributes(
+            self.members, 'Songwriting')
+        self.work_ethic = sum_attributes(
+            self.members, 'WorkEthic')
+        print(self.creativity, self.songwriting, self.work_ethic)
+
+
+def sum_attributes(musicians, attribute):
+    total = 0
+    for musician in musicians:
+        total += getattr(musician, attribute)
+    return total
+
+
+start()
