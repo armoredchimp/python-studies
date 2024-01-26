@@ -83,6 +83,8 @@ class Band():
             self.members, 'WorkEthic')
         print(self.creativity, self.songwriting, self.work_ethic)
 
+    # def write_song(self, creativity, songwriting, work_ethic):
+
 
 def sum_attributes(musicians, attribute):
     total = 0
