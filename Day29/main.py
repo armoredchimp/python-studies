@@ -2,6 +2,7 @@ from tkinter import *
 import random
 import os
 import pyperclip
+import json
 from tkinter import messagebox
 print(os.getcwd())
 
@@ -44,6 +45,11 @@ def save_output():
     web_output = website_entry.get()
     email_output = email_entry.get()
     pass_output = pass_entry.get()
+    new_data = {
+        web_output: {
+            "email": email_output,
+            "password": pass_output,
+        }}
 
     if len(web_output) == 0 or len(pass_output) == 0:
         no = messagebox.showinfo(
@@ -53,12 +59,18 @@ def save_output():
         title=web_output, message=f'Details entered: \nEmail: {email_output}\nPassword: {pass_output}\nOk? You got problem with this? Cancel or accept.')
 
     if yes:
-        with open('data.txt', 'a') as file:
-            file.write(f'{web_output} | {email_output} | {pass_output}\n')
+        with open('data.json', 'w') as file:
+            data = json.load(file)
+            data.update(new_data)
+            json.dump(data, file, indent=4)
 
     website_entry.delete(0, END)
     # email_entry.delete(0, END)
     pass_entry.delete(0, END)
+
+    # if yes:
+    #     with open('data.json', 'r') as file:
+    #         json.load(file)
 
 
 canvas = Canvas(height=200, width=200)

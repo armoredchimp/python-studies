@@ -37,9 +37,20 @@ import csv
 # print(letters)
 
 data = pandas.read_csv('nato_phonetic_alphabet.csv')
-user_input = input('Type something: ').upper()
 phonetic_dict = {row.letter: row.code for (index, row) in data.iterrows()}
-letters = [phonetic_dict[letter] for letter in user_input]
+
+
+def get_input():
+    user_input = input('Type something: ').upper()
+    try:
+        letters = [phonetic_dict[letter] for letter in user_input]
+        print(letters)
+    except KeyError:
+        print('Invalid Input')
+        get_input()
+
+
+get_input()
 
 # student_data_frame = pandas.DataFrame(student_dict)
 
